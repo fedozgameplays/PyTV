@@ -1,9 +1,16 @@
 import vlc
 import tkinter
 import json
+import time
+
+
+def stretch(bild, row, column):
+    bild.grid_rowconfigure(row, weight=1)
+    bild.grid_columnconfigure(column, weight=1)
 
 
 def Player(videopanel, url):
+    global player
     main.update()
     Instance = vlc.Instance('--network-caching=2000')
     player = Instance.media_player_new()
@@ -14,17 +21,88 @@ def Player(videopanel, url):
 
 
 def gui(name, url):
+    global player
     screen = tkinter.Toplevel(main)
     screen.title(name)
     screen.lift(aboveThis=main)
     screen.attributes('-fullscreen', True)
     screen.configure(background='black')
+    stretch(screen, 0, 0)
     videopanel = tkinter.Frame(screen, bg="black")
-    tkinter.Canvas(videopanel, bg="black").pack(fill=tkinter.BOTH, expand=1)
-    videopanel.pack(fill=tkinter.BOTH, expand=1)
-    title = ("Lade {}...".format(name))
-    l1 = tkinter.Label(videopanel, text=title, font=("Courier", 44), fg="white", bg="black")
-    l1.pack()
+    stretch(videopanel, 0, 0)
+    panel_canvas = tkinter.Canvas(videopanel, bg="black", highlightbackground="black")
+    panel_canvas.grid(row=0, column=0, rowspan=2)
+    stretch(panel_canvas, 0, 0)
+    videopanel.grid(row=0, column=0, rowspan=2, sticky="nwse")
+    menupanel = tkinter.Frame(screen, bg="#252626", height="1")
+    menupanel.grid(row=1, column=0, sticky="nwse")
+    menupanel.grid_columnconfigure(3, weight=1)
+    bilder_pfad = ["play_white.png", "pause_white.png",
+                   "forward_white.png", "backward_white.png", "cross_white.png"]
+    bilder_gui = []
+    for i in range(1, (len(bilder_pfad)+1)):
+        bilder_gui.append(tkinter.PhotoImage(file=bilder_pfad[i-1]))
+        bilder_gui[i-1] = bilder_gui[i-1].subsample(12, 12)
+
+    def media_control(control):
+        if str(control) == "1":
+            if player.is_playing():
+                player.stop()
+                media_buttons[0]["image"] = bilder_gui[0]
+            else:
+                player.play()
+                media_buttons[0]["image"] = bilder_gui[1]
+        elif str(control) == "2":
+            print("2")
+        elif str(control) == "3":
+            print("3")
+        elif str(control) == "4":
+            player.stop()
+            screen.destroy()
+        else:
+            print("Fehler")
+
+    media_control_images = [bilder_gui[1], bilder_gui[3], bilder_gui[2], bilder_gui[4]]
+    media_buttons = []
+    for i in range(1, len(media_control_images)+1):
+        media_buttons.append(tkinter.Button(menupanel, image=media_control_images[i-1],
+                                            text="", activebackground="#252626",
+                                            bg="#252626", border="0", width="50",
+                                            command=lambda i=i: media_control(str(i))))
+
+    def hover(e):
+        zeit = 0.001
+        for i in range(40):
+            while menupanel["height"] < 40:
+                menupanel["height"] = menupanel["height"] + 1
+                main.update()
+                zeit = float(zeit) + 0.0002
+                time.sleep(float(zeit))
+        if player.is_playing():
+            media_buttons[0]["image"] = bilder_gui[1]
+        else:
+            media_buttons[0]["image"] = bilder_gui[0]
+        media_buttons[1]["image"] = bilder_gui[3]
+        media_buttons[2]["image"] = bilder_gui[2]
+        media_buttons[3]["image"] = bilder_gui[4]
+        for i in range(1, len(media_buttons)):
+            media_buttons[i-1].grid(row=0, column=i-1, sticky="w")
+        media_buttons[3].grid(row=0, column=3, sticky="e")
+
+    def no_hover(e):
+        time.sleep(1)
+        for i in range(1, len(media_buttons)+1):
+            media_buttons[i-1].grid_forget()
+        zeit = 0.001
+        for i in range(40):
+            while menupanel["height"] > 1:
+                menupanel["height"] = menupanel["height"] - 1
+                main.update()
+                zeit = float(zeit) + 0.0002
+                time.sleep(float(zeit))
+
+    menupanel.bind("<Enter>", hover)
+    menupanel.bind("<Leave>", no_hover)
     Player(videopanel, url)
 
 
@@ -55,19 +133,17 @@ main = tkinter.Tk()
 main.title("PyTV")
 main.geometry("1280x720")
 main.configure(background="#252626")
-main.grid_rowconfigure(1, weight=1)
-main.grid_columnconfigure(0, weight=1)
+stretch(main, 1, 0)
 main.bind("<MouseWheel>", scroll)
 
 menu = tkinter.Frame(main, bg="#252626")
 menu.grid(row=0, column=0, sticky="nwe")
 menu_buttons = []
 menu_items = ["Einstellungen", "Hilfe", "Über", "Beenden"]
-for i in range(1, 5):
+for i in range(1, len(menu_items)+1):
     menu_buttons.append(tkinter.Button(menu, text=menu_items[i-1], relief="flat", bg="#252626",
                                        fg="white", padx="20", command=lambda i=i: menu_option(i)))
     menu_buttons[i-1].grid(row=0, column=i-1)
-
 
 with open("sender.json") as file:
     sender_json = json.load(file)
