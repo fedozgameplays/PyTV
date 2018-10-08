@@ -1,0 +1,108 @@
+{
+  "sender": [
+    {
+      "name": "Das Erste",
+      "url": "http://daserstehdde-lh.akamaihd.net/i/daserstehd_de@629196/master.m3u8"
+    },
+    {
+      "name": "ZDF",
+      "url": "http://zdf1314-lh.akamaihd.net/i/de14_v1@392878/master.m3u8"
+    },
+    {
+      "name": "MDR",
+      "url": "https://mdrsnhls-lh.akamaihd.net/i/livetvmdrsachsen_de@513998/master.m3u8"
+    },
+    {
+      "name": "3sat",
+      "url": "http://zdf0910-lh.akamaihd.net/i/dach10_v1@392872/master.m3u8"
+    },
+    {
+      "name": "MTV",
+      "url": "http://unilivemtveu-lh.akamaihd.net/i/mtvde_1@134922/master.m3u8"
+    },
+    {
+      "name": "ARTE",
+      "url": "http://artelive-lh.akamaihd.net/i/artelive_de@393591/master.m3u8"
+    },
+    {
+      "name": "ARD-ALPHA",
+      "url": "http://livestreams.br.de/i/bralpha_germany@119899/master.m3u8"
+    },
+    {
+      "name": "Phoenix",
+      "url": "http://zdf0910-lh.akamaihd.net/i/de09_v1@392871/master.m3u8"
+    },
+    {
+      "name": "ZDF Info",
+      "url": "http://zdf1112-lh.akamaihd.net/i/de12_v1@392882/master.m3u8"
+    },
+    {
+      "name": "ZDF neo",
+      "url": "http://zdf1314-lh.akamaihd.net/i/de13_v1@392877/master.m3u8"
+    },
+    {
+      "name": "Tagesschau 24",
+      "url": "http://tagesschau-lh.akamaihd.net/i/tagesschau_1@119231/master.m3u8"
+    },
+    {
+      "name": "BR Nord",
+      "url": "http://livestreams.br.de/i/bfsnord_germany@119898/master.m3u8"
+    },
+    {
+      "name": "HR",
+      "url": "http://live1_hr-lh.akamaihd.net/i/hr_fernsehen@75910/master.m3u8"
+    },
+    {
+      "name": "KIKA",
+      "url": "https://kikade-lh.akamaihd.net/i/livetvkika_de@450035/master.m3u8"
+    },
+    {
+      "name": "NDR Hamburg",
+      "url": "https://ndrfs-lh.akamaihd.net/i/ndrfs_hh@430231/index_3776_av-p.m3u8"
+    },
+    {
+      "name": "RBB Berlin",
+      "url": "https://rbblive-lh.akamaihd.net/i/rbb_berlin@144674/master.m3u8"
+    },
+    {
+      "name": "SR",
+      "url": "http://livestream.sr-online.de/live.m3u8"
+    },
+    {
+      "name": "SWR",
+      "url": "http://swrbw-lh.akamaihd.net/i/swrbw_live@196738/master.m3u8"
+    },
+    {
+      "name": "WDR",
+      "url": "http://wdr_fs-lh.akamaihd.net/i/wdrfs_weltweit@112033/master.m3u8"
+    },
+    {
+      "name": "N24",
+      "url": "https://live2weltcms-lh.akamaihd.net/i/Live2WeltCMS_1@444563/master.m3u8"
+    },
+    {
+      "name": "n-tv",
+      "url": "https://ntvlivehls-lh.akamaihd.net/i/ntvlivehls_1@409250/master.m3u8"
+    },
+    {
+      "name": "Welt der Wunder",
+      "url": "http://live.vidoo.de/live/weltderwunder/master.m3u8"
+    },
+    {
+      "name": "Deluxe Music",
+      "url": "https://streaming-02.mivitec.net/live/smil:test.smil/playlist.m3u8"
+    },
+    {
+      "name": "Deutsches Musik Fernsehen",
+      "url": "https://tv.artcom-venture.de/dmf/tv_720.m3u8"
+    },
+    {
+      "name": "Folx TV",
+      "url": "http://46.101.244.86:8081/folx-abr/live-abr/fle/fle1/playlist.m3u8"
+    },
+    {
+      "name": "Sky Sport News",
+      "url": "https://eventhlshttps-i.akamaihd.net/hls/live/263645/ssn-hd-https/index.m3u8"
+    }
+  ]
+}
