@@ -71,7 +71,7 @@ def gui(name, url):
                                             command=lambda i=i: media_control(str(i))))
 
     def hover(e):
-        zeit = 0.001
+        zeit = 0.0008
         for i in range(40):
             while menupanel["height"] < 40:
                 menupanel["height"] = menupanel["height"] + 1
@@ -110,6 +110,7 @@ def sender(nummer):
     global sender_json
     name = sender_json["sender"][nummer]["name"]
     url = sender_json["sender"][nummer]["url"]
+
     gui(name, url)
 
 
@@ -149,8 +150,12 @@ with open("sender.json") as file:
     sender_json = json.load(file)
 länge = len(sender_json["sender"])
 namen = []
+bilder_sender = []
+hd = []
 for tv_sender in sender_json["sender"]:
     namen.append(tv_sender["name"])
+    bilder_sender.append(tv_sender["logo"])
+    hd.append(tv_sender["hd"])
 
 auswahl_canvas = tkinter.Canvas(main, highlightbackground="#252626")
 auswahl_canvas.grid(row=1, column=0, sticky="nswe")
@@ -163,7 +168,7 @@ button = []
 bilder = []
 
 for i in range(1, länge+1):
-    bilder.append(tkinter.PhotoImage(file="images/{}.png".format(i-1)))
+    bilder.append(tkinter.PhotoImage(file="logos/{}".format(bilder_sender[i-1])))
     button.append(tkinter.Button(auswahl, text=namen[i-1], image=bilder[i-1], anchor="w",
                                  padx="20", bg="#252626", compound="left", relief="flat",
                                  fg="white", command=lambda i=i: sender(i-1)))
@@ -171,9 +176,13 @@ for i in range(1, länge+1):
         button[i-1]["bg"] = "#252626"
     else:
         button[i-1]["bg"] = "#3e4242"
-    bilder[i-1] = bilder[i-1].subsample(2, 2)
     button[i-1].grid(row=(i), column=0, sticky="wse")
     button[i-1]["image"] = bilder[i-1]
+
+    if hd[i-1]:
+        button[i-1]["text"] = "{0:30} {1}".format(namen[i-1], "HD verfügbar")
+    else:
+        button[i-1]["text"] = "{0:30} {1}".format(namen[i-1], "HD nicht verfügbar")
 
     def hover(nummer):
         button[nummer]["bg"] = "#446284"
